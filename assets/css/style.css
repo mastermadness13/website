@@ -2617,6 +2617,30 @@ footer {
 
 
 
+body.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+body.dark-mode .header-main,
+body.dark-mode .header-top,
+body.dark-mode .modal,
+body.dark-mode .notification-toast {
+  background-color: #1e1e1e;
+}
+
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode .search-field {
+  background-color: #2c2c2c;
+  color: #ffffff;
+  border: 1px solid #444;
+}
+
+body.dark-mode .action-btn ion-icon {
+  color: #ffffff;
+}
+
   /**
    * #BANNER
    */
