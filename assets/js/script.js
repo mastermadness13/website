@@ -119,7 +119,107 @@
       </div>
     </div>
   </section>
+<script>
+  'use strict';
 
+  // Modal Window
+  const modal = document.querySelector('[data-modal]');
+  const modalCloseBtn = document.querySelector('[data-modal-close]');
+  const modalCloseOverlay = document.querySelector('[data-modal-overlay]');
+
+  const closeModal = () => modal.classList.add('closed');
+
+  modalCloseOverlay.addEventListener('click', closeModal);
+  modalCloseBtn.addEventListener('click', closeModal);
+
+  // Toast Notification
+  const notificationToast = document.querySelector('[data-toast]');
+  const toastCloseBtn = document.querySelector('[data-toast-close]');
+
+  if (toastCloseBtn && notificationToast) {
+    toastCloseBtn.addEventListener('click', () => {
+      notificationToast.classList.add('closed');
+    });
+  }
+
+  // Mobile Menu
+  const mobileMenuOpenBtns = document.querySelectorAll('[data-mobile-menu-open-btn]');
+  const mobileMenus = document.querySelectorAll('[data-mobile-menu]');
+  const mobileMenuCloseBtns = document.querySelectorAll('[data-mobile-menu-close-btn]');
+  const overlay = document.querySelector('[data-overlay]');
+
+  mobileMenuOpenBtns.forEach((btn, index) => {
+    const closeFunc = () => {
+      mobileMenus[index].classList.remove('active');
+      overlay.classList.remove('active');
+    };
+
+    btn.addEventListener('click', () => {
+      mobileMenus[index].classList.add('active');
+      overlay.classList.add('active');
+    });
+
+    if (mobileMenuCloseBtns[index]) {
+      mobileMenuCloseBtns[index].addEventListener('click', closeFunc);
+    }
+  });
+
+  if (overlay) {
+    overlay.addEventListener('click', () => {
+      mobileMenus.forEach(menu => menu.classList.remove('active'));
+      overlay.classList.remove('active');
+    });
+  }
+
+  // Accordion Menus
+  const accordionButtons = document.querySelectorAll('[data-accordion-btn]');
+  const accordions = document.querySelectorAll('[data-accordion]');
+
+  accordionButtons.forEach((btn, index) => {
+    btn.addEventListener('click', () => {
+      const isActive = accordions[index].classList.contains('active');
+
+      accordions.forEach(accordion => accordion.classList.remove('active'));
+      accordionButtons.forEach(button => button.classList.remove('active'));
+
+      if (!isActive) {
+        accordions[index].classList.add('active');
+        btn.classList.add('active');
+      }
+    });
+  });
+
+  // Dark Mode Toggle
+  const toggleBtn = document.getElementById('darkModeToggle');
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    });
+
+    // Load dark mode preference
+    const savedDarkMode = localStorage.getItem('darkMode') === 'true';
+    if (savedDarkMode) {
+      document.body.classList.add('dark-mode');
+    }
+  }
+
+  // Optional: Search in Sidebar Categories
+  const searchInput = document.querySelector('.sidebar-search');
+  const categoryItems = document.querySelectorAll('.sidebar-submenu-title .product-name');
+
+  if (searchInput) {
+    searchInput.addEventListener('input', function () {
+      const searchTerm = this.value.toLowerCase();
+
+      categoryItems.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        item.closest('.sidebar-submenu-category').style.display = text.includes(searchTerm) ? 'block' : 'none';
+      });
+    });
+  }
+</script>
   <!-- Products Showcase -->
   <section class="product-showcase">
     <div class="container">
