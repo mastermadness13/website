@@ -55,6 +55,12 @@ for (let i = 0; i < mobileMenuOpenBtn.length; i++) {
 
 
 
+<script>
+  const toggleBtn = document.getElementById('darkModeToggle');
+  toggleBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+  });
+</script>
 
 
 // accordion variables
